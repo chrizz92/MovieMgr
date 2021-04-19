@@ -1,0 +1,35 @@
+﻿@model MovieMgr.Web.Models.HomeIndexViewModel
+
+<form asp-action="Index">
+    <div class="form-group">
+        <label asp-for="CategoryName" class="form-check-label font-weight-bold mb-1">@Html.DisplayNameFor(m => m.CategoryName)</label>
+        <input asp-for="CategoryName" class="form-control" />
+        <span asp-validation-for="CategoryName" class="text-danger"></span>
+        <input type="submit" value="Neue Kategorie speichern" class="btn btn-info form-control mt-2" />
+    </div>
+</form>
+<table class="table">
+    <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(m=>m.CategoryName)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+    </thead>
+    <tbody>
+        @foreach (var cat in Model.Categories)
+        {
+            <tr>
+                <td>
+                    @cat.CategoryName
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-categoryId="@cat.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

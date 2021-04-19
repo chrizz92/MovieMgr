@@ -1,0 +1,57 @@
+﻿@model MovieMgr.Web.Models.HomeStatisticsViewModel
+
+<h1>Statistikdaten</h1>
+<table class="table mb-5">
+    <tr>
+        <th>
+            Längster Film:
+        </th>
+        <td>
+            @Model.LongestMovie.Title
+        </td>
+        <td>
+            @(Model.LongestMovie.Duration/60)h @(Model.LongestMovie.Duration%60)min
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Top Kategorie (Filmanzahl):
+        </th>
+        <td>
+            @Model.Categories.Where(c=>c.Id==Model.TopCategoryId).First().CategoryName
+        </td>
+    </tr>
+</table>
+<h3>Kategorie-Auswertung:</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Kategorie
+            </th>
+            <th>
+                Filmanzahl
+            </th>
+            <th>
+                Gesamtdauer
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cat in Model.Categories)
+        {
+            <tr>
+                <td>
+                    @cat.CategoryName
+                </td>
+                <td>
+                    @Model.Movies.Where(m=>m.Category_Id==cat.Id).Count()
+                </td>
+                <td>
+                    @Model.Movies.Where(m => m.Category_Id == cat.Id).Sum(m=>m.Duration)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,50 @@
+﻿@model MovieMgr.Web.Models.HomeDetailsViewModel
+
+
+<p>
+    <a asp-controller="Movie" asp-action="Create" asp-route-categoryId="@Model.Category.Id">Neuen Film anlegen</a>
+</p>
+<h1>Filme zur Kategorie @Model.Category.CategoryName</h1>
+<table class="table">
+    <thead>
+        @if (Model.Movies.Count>0)
+        {
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(m=>m.Movies.First().Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m=>m.Movies.First().Duration)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Movies.First().Year)
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>             
+        }
+    </thead>
+    <tbody>
+        @if (Model.Movies.Count > 0)
+        {
+            @foreach (var movie in Model.Movies)
+            {
+                <tr>
+                    <td>
+                        @movie.Title
+                    </td>
+                    <td>
+                        @movie.Duration
+                    </td>
+                    <td>
+                        @movie.Year
+                    </td>
+                    <td>
+                        <a asp-controller="Movie" asp-action="Delete" asp-route-movieId="@movie.Id">Film löschen</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

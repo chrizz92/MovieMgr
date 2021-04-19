@@ -1,0 +1,31 @@
+﻿@model MovieMgr.Web.Models.MovieDeleteViewModel
+
+<h3>Wollen Sie diesen Film wirklich löschen?</h3>
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(m=>m.Movie.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.Movie.Title
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(m => m.Movie.Duration)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Movie.Duration
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(m => m.Movie.Year)
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.Movie.Year
+        </dd>       
+    </dl>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MovieId" />
+        <input type="hidden" asp-for="CategoryId" />
+        <input type="submit" value="Löschen" class="btn btn-outline-info" /> |
+        <a asp-controller="Home" asp-action="Details" asp-route-categoryId="@Model.Movie.Category_Id">Zurück zur Übersicht</a>
+    </form>
+</div>
